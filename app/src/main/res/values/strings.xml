@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CountTimerApp</string>
+    <string name="input_text">Enter time (in minutes)</string>
+    <string name="timer_text">0</string>
+    <string name="startBtn_text">Start</string>
+    <string name="resetBtn_text">Reset</string>
 </resources>
