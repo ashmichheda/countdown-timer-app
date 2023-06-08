@@ -3,10 +3,12 @@ package com.example.counttimerapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,10 +35,16 @@ class MainActivity : AppCompatActivity() {
             if (isTimerRunning) {
                 pauseTimer()
             } else {
-                editInputTxt = findViewById(R.id.editInputTxt)
-                val inputTime = editInputTxt.text.toString()
-                time_in_milli_seconds = inputTime.toLong() * START_MILLI_SECONDS
-                startTimer(time_in_milli_seconds)
+                try {
+                    editInputTxt = findViewById(R.id.editInputTxt)
+                    val inputTime = editInputTxt.text.toString()
+                    time_in_milli_seconds = inputTime.toLong() * START_MILLI_SECONDS
+                    startTimer(time_in_milli_seconds)
+                } catch (exception: java.lang.NumberFormatException) {
+                    Log.i("NumberFormatException", "Please enter a valid number")
+                    val toast = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_SHORT)
+                    toast.show()
+                }
             }
         }
 
