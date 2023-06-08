@@ -30,7 +30,7 @@
         android:layout_marginTop="220dp"
         android:text="@string/timer_text"
         android:textColor="#2C1919"
-        android:textSize="60sp"
+        android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
