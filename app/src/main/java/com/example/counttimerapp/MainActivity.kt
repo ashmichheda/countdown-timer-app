@@ -1,5 +1,6 @@
 package com.example.counttimerapp
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,12 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
 
 class MainActivity : AppCompatActivity() {
 
     var START_MILLI_SECONDS = 60000L
     lateinit var countDownTimer: CountDownTimer
+    lateinit var viewKonfetti: KonfettiView
     lateinit var editInputTxt: EditText
     lateinit var timerTxt: TextView
     lateinit var timerBtn: Button
@@ -31,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         timerBtn = findViewById(R.id.timerBtn)
         resetBtn = findViewById(R.id.resetBtn)
         timerTxt = findViewById(R.id.timerTxt)
+        viewKonfetti = findViewById(R.id.viewKonfetti)
         timerBtn.setOnClickListener {
             if (isTimerRunning) {
                 pauseTimer()
@@ -69,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                timerTxt.text = ""
+                buildConfetti()
 
             }
         }
@@ -78,6 +84,19 @@ class MainActivity : AppCompatActivity() {
         isTimerRunning = true
         timerBtn.text = "Pause"
         resetBtn.visibility = View.INVISIBLE
+    }
+
+    private fun buildConfetti() {
+        viewKonfetti.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+            .setDirection(0.0, 359.0)
+            .setSpeed(1f, 5f)
+            .setFadeOutEnabled(true)
+            .setTimeToLive(2000L)
+            .addShapes(Shape.Square, Shape.Circle)
+            .addSizes(Size(12))
+            .setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
+            .streamFor(300, 5000L)
     }
 
     private fun updateTextUI() {
